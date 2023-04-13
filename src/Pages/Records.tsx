@@ -4,12 +4,11 @@ import { FormGroup, Input, Label, Table } from "reactstrap";
 import { GetMaps, GetRecords } from "../API/RecordsEndpoints";
 import Record from '../Models/Record';
 
-// https://stackoverflow.com/a/52560608
-const format = (val: number) => `0${Math.floor(val)}`.slice(-2);
-function formatTime(timeS: number) {
-    const hours = timeS / 3600;
-    const minutes = (timeS % 3600) / 60;
-    const seconds = timeS % 60;
+const format = (x) => `0${Math.floor(x)}`.slice(-2);
+function formatTime(timeInMs) {
+    const seconds = (timeInMs / 1000) % 60;
+    const minutes = timeInMs / 60000;
+    const hours = timeInMs / 3.6e+6;
 
     return [hours, minutes, seconds].map(format).join(':');
 }
